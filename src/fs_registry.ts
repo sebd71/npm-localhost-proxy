@@ -46,8 +46,9 @@ export class TarballRegistryBackend implements registry.RegistryBackend
 				package_json.on('close', (code) => {
 					if (code == 0 && serialized_json.length > 0) {
 						let pkg: registry.PkgJsonRW = JSON.parse(serialized_json);
+                        let tarball='-/' + filename;
 						pkg["dist"] = {
-							"tarball": '-/' + filename,
+							"tarball": tarball.replace(/\/\//g, "/"),
 							"integrity": digest_string
 						};
 						accepted([pkg]);

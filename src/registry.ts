@@ -145,6 +145,7 @@ export class Registry {
 	}
 
 	public isRegistered(path: string): boolean {
+		if (path.charAt(0) == "/") path = path.substr(1);
 		return this.pkgs.filter(json => json.dist.tarball === "-/" + path).length === 1;
 	}
 };
